@@ -3,19 +3,21 @@
     justify-content: center;
 }
 
-#groupsContainer{
+#groupsContainer {
     height: 40rem;
     display: flex;
     justify-content: center;
     justify-content: space-evenly;
 }
 
-.light{
+.light {
     border: 1px solid #000;
     border-radius: 120px;
     width: 220px;
     height: 220px;
 }
 
+.lightLit {
+    filter: brightness(85%);
 
-
+}

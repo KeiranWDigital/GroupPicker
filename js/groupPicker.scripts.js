@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+    var seconds = 120;
+    var refreshIntervalID;
+    var incrementJ;
+
     showGroups(3);
     $("#numberOfGroupsDropdownTrigger").html("Three Groups");
 
@@ -24,13 +29,44 @@ $(document).ready(function () {
     }
 
     function getColour(number) {
-        colours = ["red","orange","blue","pink","green","purple"]
+        colours = ["red", "orange", "blue", "pink", "green", "purple"]
         return colours[number];
     }
 
 
     $("#secondsDropdown > li > a").click(function () {
-        let seconds = $(this).attr("value");
+        seconds = $(this).attr("value");
         $("#secondsDropdownTrigger").html($(this).html());
     });
+
+    $("#start").click(function () {
+        incrementJ = 3;
+
+        console.log("Starting");
+        $(".lightContainer").removeClass("lit");
+        increment();
+        refreshIntervalID = setInterval(increment, seconds * 1000);
+    });
+
+    $("#stop").click(function () {
+        console.log("Stopping");
+        clearInterval(refreshIntervalID);
+    })
+
+    function cycleGroups(groupsArray, i) {
+        $(groupsArray[i]).addClass("lit");
+    }
+
+
+    function increment() {
+        console.log("Firing");
+        let groupsArray = $(".lightContainer");
+
+        incrementJ = incrementJ % 360 + 1;
+        if (incrementJ > groupsArray.length - 1)
+            incrementJ = 0;
+
+        cycleGroups(groupsArray, incrementJ);
+    }
+
 });
